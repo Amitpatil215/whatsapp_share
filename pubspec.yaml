@@ -1,6 +1,6 @@
 name: whatsapp_share
 description: Simple way to share message, links or files from your flutter app to specific contact in whatsapp
-version: 1.0.7
+version: 1.0.8
 homepage: https://github.com/lubritto/whatsapp_share
 
 

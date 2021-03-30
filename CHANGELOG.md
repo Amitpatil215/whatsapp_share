@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.8
+
+* ```isInstalled()``` method for checking whatsapp installed in device or not
+
 ## 1.0.7
 
 * Documented and optimized for whatsapp share
