@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.7
+
+* Documented and optimized for whatsapp share
+
 ## 1.0.6
 
 * Whatsapp share
