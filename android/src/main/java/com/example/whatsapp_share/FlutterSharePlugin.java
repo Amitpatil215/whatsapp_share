@@ -2,6 +2,7 @@ package com.example.whatsapp_share;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
@@ -59,8 +60,35 @@ public class FlutterSharePlugin implements FlutterPlugin, MethodCallHandler {
             shareFile(call, result);
         } else if (call.method.equals("share")) {
             share(call, result);
+        } else if (call.method.equals("isInstalled")) {
+            isInstalled(call, result);
         } else {
             result.notImplemented();
+        }
+    }
+
+    private boolean isPackageInstalled(String packageName, PackageManager packageManager) {
+         try
+        {
+            packageManager.getPackageInfo(packageName, 0);
+            return true;
+        }
+        catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
+    private void isInstalled(MethodCall call, Result result) {
+        try
+        {
+            PackageManager pm = context.getPackageManager();
+            boolean isInstalled = isPackageInstalled("com.whatsapp", pm);
+            result.success(isInstalled);
+        }
+        catch (Exception ex)
+        {
+            Log.println(Log.ERROR, "", "FlutterShare: Error");
+            result.error(ex.getMessage(), null, null);
         }
     }
 

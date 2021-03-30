@@ -7,6 +7,14 @@ import 'package:flutter/services.dart';
 class WhatsappShare {
   static const MethodChannel _channel = MethodChannel('whatsapp_share');
 
+  /// Checks whether whatsapp is installed in device or not
+  /// return true if installed otherwise false.
+  static Future<bool> isInstalled() async {
+    final bool success =
+        await _channel.invokeMethod('isInstalled', <String, dynamic>{});
+    return success;
+  }
+
   /// Shares a message or/and link url with whatsapp.
   /// - Text: Is the [text] of the message.
   /// - LinkUrl: Is the [linkUrl] to include with the message.

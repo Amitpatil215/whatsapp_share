@@ -77,6 +77,18 @@ If you want to learn more about file provider you can access:
 
 Here is an snippets app displaying the two whatsapp share methods .
 
+### Whatsapp installed in this device ?
+
+```Dart
+ Future<void> isInstalled() async {
+    final val = await WhatsappShare.isInstalled();
+    print('Whatsapp is installed: $val');
+  }
+```
+<small>If whatsapp is not installed, please do not call ```WhatsappShare.share()``` and ```WhatsappShare.shareFile()```
+</small>
+
+
 ### Share text, links
 
 ```Dart

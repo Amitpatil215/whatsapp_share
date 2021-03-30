@@ -38,6 +38,11 @@ class MyApp extends StatelessWidget {
     );
   }
 
+  Future<void> isInstalled() async {
+    final val = await WhatsappShare.isInstalled();
+    print('Whatsapp is installed: $val');
+  }
+
   Future<void> shareScreenShot() async {
     Directory directory;
     if (Platform.isAndroid) {
@@ -84,6 +89,10 @@ class MyApp extends StatelessWidget {
                 ElevatedButton(
                   child: Text('Share screenshot'),
                   onPressed: shareScreenShot,
+                ),
+                ElevatedButton(
+                  child: Text('is Installed'),
+                  onPressed: isInstalled,
                 ),
               ],
             ),
