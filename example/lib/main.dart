@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   File _image;
 
   Future<void> share() async {
-    await FlutterShare.share(
+    await WhatsappShare.share(
         title: 'Example share',
         text: 'Example share text',
         linkUrl: 'https://flutter.dev/',
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       directory = await getApplicationDocumentsDirectory();
     }
     print('${directory.path} / ${_image.path}');
-    await FlutterShare.shareFile(
+    await WhatsappShare.shareFile(
       title: 'Example share',
       text: 'Example share text',
       phone: '911234567890',
@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
 
     await Future.delayed(Duration(seconds: 1));
 
-    await FlutterShare.shareFile(
+    await WhatsappShare.shareFile(
       title: 'Compartilhar comprovante',
       chooserTitle: 'Chooser title',
       text: 'wpndet',

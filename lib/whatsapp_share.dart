@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class FlutterShare {
+class WhatsappShare {
   static const MethodChannel _channel = MethodChannel('whatsapp_share');
 
   /// Shares a message or/and link url with app chooser.

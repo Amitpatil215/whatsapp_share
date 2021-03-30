@@ -82,7 +82,7 @@ Here is an snippets app displaying the two whatsapp share methods .
 ```Dart
 
  Future<void> share() async {
-    await FlutterShare.share(
+    await WhatsappShare.share(
         title: 'Example share',
         text: 'Example share text',
         linkUrl: 'https://flutter.dev/',
@@ -100,7 +100,7 @@ Here is an snippets app displaying the two whatsapp share methods .
 ```Dart
 
  Future<void> shareFile() async {
-    await FlutterShare.shareFile(
+    await WhatsappShare.shareFile(
       title: 'Example share',
       text: 'Example share text',
       phone: '911234567890',
