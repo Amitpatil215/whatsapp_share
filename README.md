@@ -1,21 +1,29 @@
 # Share Plugin
 
-[![pub package](https://img.shields.io/pub/v/flutter_share.svg)](https://pub.dartlang.org/packages/flutter_share)
+[![pub package](https://img.shields.io/pub/v/whatsapp_share.svg)](https://pub.dartlang.org/packages/flutter_share)
 
-## ** This plugin was discontinued after the [flutter official one](https://pub.dev/packages/share) add support to files **
 
-A Flutter plugin for IOS and Android providing a simple way to share a message, link or local files.
+A Flutter plugin for IOS and Android providing a simple way to share a message, link or local files to specific WhatsApp contact.
 
 ## Features:
 
-* Share messages and/or link urls.
-* Share local files.
+* Share messages and/or link urls to specific contact.
+* Share local files to specific contact.
 
-![android](assets/gifs/flutter_share_android.gif) &nbsp; &nbsp; &nbsp; &nbsp; ![ios](assets/gifs/flutter_share_ios.gif)
 
 ## Installation
 
-First, add `flutter_share` as a [dependency in your pubspec.yaml file](https://flutter.io/using-packages/).
+First, add this to your package's pubspec.yaml file:
+```
+dependencies:
+  whatsapp_share: ^1.0.6
+```
+
+Now in your Dart code, you can use:
+```
+import 'package:whatsapp_share/whatsapp_share.dart';
+```
+## Installation (Platform Specific)
 
 ### iOS
 
@@ -65,69 +73,39 @@ If you want to learn more about file provider you can access:
 
   - https://developer.android.com/reference/android/support/v4/content/FileProvider 
 
-### Example
+## How to use?
 
-Here is an example flutter app displaying the two shares methods. (I'm using documents_picker just to get a local file you don't need to use.)
+Here is an snippets app displaying the two whatsapp share methods .
 
-```dart
-import 'package:flutter/material.dart';
-import 'dart:async';
+### Share text, links
 
-import 'package:flutter/services.dart';
-import 'package:flutter_share/flutter_share.dart';
-import 'package:documents_picker/documents_picker.dart';
+```Dart
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  Future<void> share() async {
+ Future<void> share() async {
     await FlutterShare.share(
-      title: 'Example share',
-      text: 'Example share text',
-      linkUrl: 'https://flutter.dev/',
-      chooserTitle: 'Example Chooser Title'
-    );
+        title: 'Example share',
+        text: 'Example share text',
+        linkUrl: 'https://flutter.dev/',
+        phone: '911234567890',
+        chooserTitle: 'Example Chooser Title',
+        );
   }
 
-  Future<void> shareFile() async {
-    List<dynamic> docs = await DocumentsPicker.pickDocuments;
-    if (docs == null || docs.isEmpty) return null;
+```
 
+### Share images, files
+
+```_image.path``` contains path of the file which is shared to the whatsapp.
+
+```Dart
+
+ Future<void> shareFile() async {
     await FlutterShare.shareFile(
       title: 'Example share',
       text: 'Example share text',
-      filePath: docs[0] as String,
+      phone: '911234567890',
+      filePath: "${_image.path}",
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              FlatButton(
-                child: Text('Share text and link'),
-                onPressed: share,
-              ),
-              FlatButton(
-                child: Text('Share local file'),
-                onPressed: shareFile,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
 ```
-
-[Feedback welcome](https://github.com/lubritto/flutter_share/issues) and
-[Pull Requests](https://github.com/lubritto/flutter_share/pulls) are most welcome!
