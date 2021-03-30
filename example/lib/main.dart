@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
     await FlutterShare.shareFile(
       title: 'Example share',
       text: 'Example share text',
+      phone: '919421068219',
       filePath: "${_image.path}",
     );
   }

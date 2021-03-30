@@ -123,6 +123,7 @@ public class FlutterSharePlugin implements FlutterPlugin, MethodCallHandler {
             String text = call.argument("text");
             String filePath = call.argument("filePath");
             String chooserTitle = call.argument("chooserTitle");
+            String phone = call.argument("phone");
 
             if (filePath == null || filePath.isEmpty())
             {
@@ -141,7 +142,7 @@ public class FlutterSharePlugin implements FlutterPlugin, MethodCallHandler {
             intent.setAction(Intent.ACTION_SEND);
             intent.setType("*/*");
             intent.setPackage("com.whatsapp");
-            intent.putExtra("jid","917775956802@s.whatsapp.net");
+            intent.putExtra("jid",phone + "@s.whatsapp.net");
             intent.putExtra(Intent.EXTRA_SUBJECT, title);
             intent.putExtra(Intent.EXTRA_TEXT, text);
             intent.putExtra(Intent.EXTRA_STREAM, fileUri);

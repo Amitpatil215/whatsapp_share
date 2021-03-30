@@ -47,15 +47,19 @@ class FlutterShare {
   static Future<bool> shareFile(
       {@required String title,
       @required String filePath,
+      @required String phone,
       String text,
       String chooserTitle}) async {
     assert(title != null && title.isNotEmpty);
     assert(filePath != null && filePath.isNotEmpty);
+    assert(phone != null && phone.isNotEmpty);
 
     if (title == null || title.isEmpty) {
       throw FlutterError('Title cannot be null');
     } else if (filePath == null || filePath.isEmpty) {
       throw FlutterError('FilePath cannot be null');
+    } else if (phone == null && phone.isNotEmpty) {
+      throw FlutterError('Phone cannot be null');
     }
 
     final bool success =
@@ -64,6 +68,7 @@ class FlutterShare {
       'text': text,
       'filePath': filePath,
       'chooserTitle': chooserTitle,
+      'phone':phone,
     });
 
     return success;
