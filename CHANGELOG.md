@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.6
+
+* Whatsapp share
+
 ## 1.0.5
 * Fix sdk environment
 
