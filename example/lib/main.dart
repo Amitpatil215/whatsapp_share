@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
         title: 'Example share',
         text: 'Example share text',
         linkUrl: 'https://flutter.dev/',
+        phone: '919660995435',
         chooserTitle: 'Example Chooser Title');
   }
 

@@ -71,12 +71,18 @@ public class FlutterSharePlugin implements FlutterPlugin, MethodCallHandler {
             String text = call.argument("text");
             String linkUrl = call.argument("linkUrl");
             String chooserTitle = call.argument("chooserTitle");
+            String phone = call.argument("phone");
 
             if (title == null || title.isEmpty())
             {
                 Log.println(Log.ERROR, "", "FlutterShare Error: Title null or empty");
                 result.error("FlutterShare: Title cannot be null or empty", null, null);
                 return;
+            } else if(phone == null || phone.isEmpty())
+            {   Log.println(Log.ERROR, "", "FlutterShare Error: phone null or empty");
+                result.error("FlutterShare: phone cannot be null or empty", null, null);
+                return;
+
             }
 
             ArrayList<String> extraTextList = new ArrayList<>();
@@ -99,13 +105,15 @@ public class FlutterSharePlugin implements FlutterPlugin, MethodCallHandler {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.setAction(Intent.ACTION_SEND);
             intent.setType("text/plain");
+            intent.setPackage("com.whatsapp");
+            intent.putExtra("jid",phone + "@s.whatsapp.net");
             intent.putExtra(Intent.EXTRA_SUBJECT, title);
             intent.putExtra(Intent.EXTRA_TEXT, extraText);
 
-            Intent chooserIntent = Intent.createChooser(intent, chooserTitle);
-            chooserIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            chooserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(chooserIntent);
+            //Intent chooserIntent = Intent.createChooser(intent, chooserTitle);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
 
             result.success(true);
         }
@@ -130,6 +138,11 @@ public class FlutterSharePlugin implements FlutterPlugin, MethodCallHandler {
                 Log.println(Log.ERROR, "", "FlutterShare: ShareLocalFile Error: filePath null or empty");
                 result.error("FlutterShare: FilePath cannot be null or empty", null, null);
                 return;
+            } else if(phone == null || phone.isEmpty())
+            {   Log.println(Log.ERROR, "", "FlutterShare Error: phone null or empty");
+                result.error("FlutterShare: phone cannot be null or empty", null, null);
+                return;
+
             }
 
             File file = new File(filePath);

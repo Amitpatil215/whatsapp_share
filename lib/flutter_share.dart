@@ -17,6 +17,7 @@ class FlutterShare {
   /// chooser popup. If null the system default title will be used.
   static Future<bool> share(
       {@required String title,
+      @required String phone,
       String text,
       String linkUrl,
       String chooserTitle}) async {
@@ -24,6 +25,8 @@ class FlutterShare {
 
     if (title == null || title.isEmpty) {
       throw FlutterError('Title cannot be null');
+    } else if (phone == null && phone.isNotEmpty) {
+      throw FlutterError('Phone cannot be null');
     }
 
     final bool success = await _channel.invokeMethod('share', <String, dynamic>{
@@ -31,6 +34,7 @@ class FlutterShare {
       'text': text,
       'linkUrl': linkUrl,
       'chooserTitle': chooserTitle,
+      'phone': phone,
     });
 
     return success;
@@ -68,7 +72,7 @@ class FlutterShare {
       'text': text,
       'filePath': filePath,
       'chooserTitle': chooserTitle,
-      'phone':phone,
+      'phone': phone,
     });
 
     return success;
