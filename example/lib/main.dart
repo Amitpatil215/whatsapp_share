@@ -9,19 +9,21 @@ import 'package:screenshot/screenshot.dart';
 
 void main() => runApp(MyApp());
 
+// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
   final _controller = ScreenshotController();
   File _image;
   Future getImage() async {
     try {
       File _pickedFile =
+          // ignore: deprecated_member_use
           await ImagePicker.pickImage(source: ImageSource.gallery);
 
       if (_pickedFile != null) {
         // getting a directory path for saving
         final directory = await getExternalStorageDirectory();
 
-// copy the file to a new path
+        // copy the file to a new path
         _image = await _pickedFile.copy('${directory.path}/image1.png');
       } else {}
     } catch (er) {
@@ -34,18 +36,23 @@ class MyApp extends StatelessWidget {
         title: 'Example share',
         text: 'Example share text',
         linkUrl: 'https://flutter.dev/',
-        phone: '919660995435',
+        phone: '911234567890',
         chooserTitle: 'Example Chooser Title');
   }
 
   Future<void> shareFile() async {
     await getImage();
-    final directory = await getExternalStorageDirectory();
+    Directory directory;
+    if (Platform.isAndroid) {
+      directory = await getExternalStorageDirectory();
+    } else {
+      directory = await getApplicationDocumentsDirectory();
+    }
     print('${directory.path} / ${_image.path}');
     await FlutterShare.shareFile(
       title: 'Example share',
       text: 'Example share text',
-      phone: '919421068219',
+      phone: '911234567890',
       filePath: "${_image.path}",
     );
   }
@@ -66,8 +73,9 @@ class MyApp extends StatelessWidget {
 
     await FlutterShare.shareFile(
       title: 'Compartilhar comprovante',
-      chooserTitle: 'God knows',
+      chooserTitle: 'Chooser title',
       text: 'wpndet',
+      phone: '911234567890',
       filePath: localPath,
     );
   }
@@ -77,7 +85,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('Whatsapp Share'),
         ),
         body: Center(
           child: Screenshot(
@@ -86,15 +94,15 @@ class MyApp extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                FlatButton(
+                ElevatedButton(
                   child: Text('Share text and link'),
                   onPressed: share,
                 ),
-                FlatButton(
+                ElevatedButton(
                   child: Text('Share local file'),
                   onPressed: shareFile,
                 ),
-                FlatButton(
+                ElevatedButton(
                   child: Text('Share screenshot'),
                   onPressed: shareScreenShot,
                 ),
