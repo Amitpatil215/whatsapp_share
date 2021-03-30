@@ -10,6 +10,7 @@ class WhatsappShare {
   /// Shares a message or/and link url with whatsapp.
   /// - Text: Is the [text] of the message.
   /// - LinkUrl: Is the [linkUrl] to include with the message.
+  /// - Phone: is the [phone] contact number to share with.
 
   static Future<bool> share({
     @required String phone,
@@ -36,7 +37,7 @@ class WhatsappShare {
   /// Shares a local file with whatsapp.
   /// - Text: Is the [text] of the message.
   /// - FilePath: Is the [filePath] to include with the message.
-  ///
+  /// - Phone: is the [phone] contact number to share with.
   static Future<bool> shareFile({
     @required String filePath,
     @required String phone,
