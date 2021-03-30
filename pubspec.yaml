@@ -1,0 +1,27 @@
+name: whatsapp_share
+description: Simple way to share message, links or files from your flutter app for Android and IOS (Enter to see some gifs).
+version: 1.0.5
+homepage: https://github.com/lubritto/whatsapp_share
+
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.example.whatsapp_share
+        pluginClass: FlutterSharePlugin
+      ios:
+        pluginClass: FlutterSharePlugin
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
