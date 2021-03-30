@@ -13,23 +13,6 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   final _controller = ScreenshotController();
   File _image;
-  Future getImage() async {
-    try {
-      File _pickedFile =
-          // ignore: deprecated_member_use
-          await ImagePicker.pickImage(source: ImageSource.gallery);
-
-      if (_pickedFile != null) {
-        // getting a directory path for saving
-        final directory = await getExternalStorageDirectory();
-
-        // copy the file to a new path
-        _image = await _pickedFile.copy('${directory.path}/image1.png');
-      } else {}
-    } catch (er) {
-      print(er);
-    }
-  }
 
   Future<void> share() async {
     await FlutterShare.share(
@@ -99,7 +82,7 @@ class MyApp extends StatelessWidget {
                   onPressed: share,
                 ),
                 ElevatedButton(
-                  child: Text('Share local file'),
+                  child: Text('Share Image'),
                   onPressed: shareFile,
                 ),
                 ElevatedButton(
@@ -112,5 +95,24 @@ class MyApp extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  ///Pick Image From gallery using image_picker plugin
+  Future getImage() async {
+    try {
+      File _pickedFile =
+          // ignore: deprecated_member_use
+          await ImagePicker.pickImage(source: ImageSource.gallery);
+
+      if (_pickedFile != null) {
+        // getting a directory path for saving
+        final directory = await getExternalStorageDirectory();
+
+        // copy the file to a new path
+        _image = await _pickedFile.copy('${directory.path}/image1.png');
+      } else {}
+    } catch (er) {
+      print(er);
+    }
   }
 }
