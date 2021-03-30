@@ -134,21 +134,23 @@ public class FlutterSharePlugin implements FlutterPlugin, MethodCallHandler {
             File file = new File(filePath);
 
             Uri fileUri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file);
-
+            Log.println(0,"",fileUri.toString());
             Intent intent = new Intent();
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.setAction(Intent.ACTION_SEND);
             intent.setType("*/*");
+            intent.setPackage("com.whatsapp");
+            intent.putExtra("jid","917775956802@s.whatsapp.net");
             intent.putExtra(Intent.EXTRA_SUBJECT, title);
             intent.putExtra(Intent.EXTRA_TEXT, text);
             intent.putExtra(Intent.EXTRA_STREAM, fileUri);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
-            Intent chooserIntent = Intent.createChooser(intent, chooserTitle);
-            chooserIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            chooserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(chooserIntent);
+            //Intent chooserIntent = Intent.createChooser(intent, chooserTitle);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
 
             result.success(true);
         }

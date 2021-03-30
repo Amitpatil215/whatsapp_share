@@ -1,6 +1,9 @@
 name: flutter_share_example
 description: Demonstrates how to use the flutter_share plugin.
 
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
 dependencies:
   flutter:
     sdk: flutter
@@ -9,6 +12,8 @@ dependencies:
   screenshot: ^0.1.1
   documents_picker: ^1.0.0
   path_provider: ^1.3.0
+  image_picker: ^0.6.2+3
+
 
   flutter_share:
     path: ../

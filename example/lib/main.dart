@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:documents_picker/documents_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 
@@ -11,6 +11,23 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   final _controller = ScreenshotController();
+  File _image;
+  Future getImage() async {
+    try {
+      File _pickedFile =
+          await ImagePicker.pickImage(source: ImageSource.gallery);
+
+      if (_pickedFile != null) {
+        // getting a directory path for saving
+        final directory = await getExternalStorageDirectory();
+
+// copy the file to a new path
+        _image = await _pickedFile.copy('${directory.path}/image1.png');
+      } else {}
+    } catch (er) {
+      print(er);
+    }
+  }
 
   Future<void> share() async {
     await FlutterShare.share(
@@ -21,13 +38,13 @@ class MyApp extends StatelessWidget {
   }
 
   Future<void> shareFile() async {
-    List<dynamic> docs = await DocumentsPicker.pickDocuments;
-    if (docs == null || docs.isEmpty) return null;
-
+    await getImage();
+    final directory = await getExternalStorageDirectory();
+    print('${directory.path} / ${_image.path}');
     await FlutterShare.shareFile(
       title: 'Example share',
       text: 'Example share text',
-      filePath: docs[0] as String,
+      filePath: "${_image.path}",
     );
   }
 
@@ -47,6 +64,8 @@ class MyApp extends StatelessWidget {
 
     await FlutterShare.shareFile(
       title: 'Compartilhar comprovante',
+      chooserTitle: 'God knows',
+      text: 'wpndet',
       filePath: localPath,
     );
   }
