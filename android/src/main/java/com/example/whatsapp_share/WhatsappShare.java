@@ -81,8 +81,17 @@ public class WhatsappShare implements FlutterPlugin, MethodCallHandler {
     private void isInstalled(MethodCall call, Result result) {
         try
         {
+            String packageName = call.argument("package");
+
+            if (packageName == null || packageName.isEmpty())
+            {
+                Log.println(Log.ERROR, "", "FlutterShare Error: Package name null or empty");
+                result.error("FlutterShare:Package name cannot be null or empty", null, null);
+                return;
+            }
+
             PackageManager pm = context.getPackageManager();
-            boolean isInstalled = isPackageInstalled("com.whatsapp", pm);
+            boolean isInstalled = isPackageInstalled(packageName, pm);
             result.success(isInstalled);
         }
         catch (Exception ex)
