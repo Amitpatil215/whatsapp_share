@@ -69,9 +69,9 @@ Add `res/xml/provider_paths.xml`:
 </paths>
 ```
 
-If you want to learn more about file provider you can access: 
+If you want to learn more about file provider you can access:
 
-  - https://developer.android.com/reference/android/support/v4/content/FileProvider 
+  - https://developer.android.com/reference/android/support/v4/content/FileProvider
 
 ## How to use?
 
@@ -81,8 +81,10 @@ Here is an snippets app displaying the two whatsapp share methods .
 
 ```Dart
  Future<void> isInstalled() async {
-    final val = await WhatsappShare.isInstalled();
-    print('Whatsapp is installed: $val');
+    final val = await WhatsappShare.isInstalled(
+      package: Package.businessWhatsapp
+    );
+    print('Whatsapp Business is installed: $val');
   }
 ```
 <small>If whatsapp is not installed, please do not call ```WhatsappShare.share()``` and ```WhatsappShare.shareFile()```

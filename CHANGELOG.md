@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.1.0
+
+* Plugin respects Business whatsapp
+* **Breaking Change**
+    * fileShare function takes list of paths instead of single path.
+    * Multiple images, files can be shared
+
 ## 1.0.9
 
 * Home page modified
