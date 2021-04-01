@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
     print('${directory.path} / ${_image.path}');
     await WhatsappShare.shareFile(
       text: 'Whatsapp message text',
-      phone: '918830868405',
+      phone: '911234567890',
       filePath: ["${_image.path}"],
     );
   }
