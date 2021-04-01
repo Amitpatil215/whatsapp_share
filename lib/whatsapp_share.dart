@@ -4,14 +4,27 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/// Select Whatsapp Type
+enum Package { whatsapp, businessWhatsapp }
+
 class WhatsappShare {
   static const MethodChannel _channel = MethodChannel('whatsapp_share');
 
   /// Checks whether whatsapp is installed in device or not
+  ///
+  /// [Package] is optional enum parameter which is defualt to [Package.whatsapp]
+  /// for business whatsapp set it to [Package.businessWhatsapp], it cannot be null
+  ///
   /// return true if installed otherwise false.
-  static Future<bool> isInstalled() async {
+  static Future<bool> isInstalled({Package package = Package.whatsapp}) async {
+    assert(package != null);
+
+    String _package;
+    _package = package.index == 0 ? "com.whatsapp" : "com.whatsapp.w4b";
     final bool success =
-        await _channel.invokeMethod('isInstalled', <String, dynamic>{});
+        await _channel.invokeMethod('isInstalled', <String, dynamic>{
+      "package": _package,
+    });
     return success;
   }
 
