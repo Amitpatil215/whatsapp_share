@@ -162,15 +162,17 @@ public class WhatsappShare implements FlutterPlugin, MethodCallHandler {
     }
 
     private void shareFile(MethodCall call, Result result) {
+        ArrayList<String> filePaths = new ArrayList<String>();
+        ArrayList<Uri> files = new ArrayList<Uri>();
         try
         {
             String title = call.argument("title");
             String text = call.argument("text");
-            String filePath = call.argument("filePath");
+            filePaths = call.argument("filePath");
             String chooserTitle = call.argument("chooserTitle");
             String phone = call.argument("phone");
 
-            if (filePath == null || filePath.isEmpty())
+            if (filePaths == null || filePaths.isEmpty())
             {
                 Log.println(Log.ERROR, "", "FlutterShare: ShareLocalFile Error: filePath null or empty");
                 result.error("FlutterShare: FilePath cannot be null or empty", null, null);
@@ -179,23 +181,24 @@ public class WhatsappShare implements FlutterPlugin, MethodCallHandler {
             {   Log.println(Log.ERROR, "", "FlutterShare Error: phone null or empty");
                 result.error("FlutterShare: phone cannot be null or empty", null, null);
                 return;
-
             }
 
-            File file = new File(filePath);
+              for(int i=0;i<filePaths.size();i++){
+                File file = new File(filePaths.get(i));
+                Uri fileUri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file);
+                files.add(fileUri);
+            }
 
-            Uri fileUri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file);
-            Log.println(0,"",fileUri.toString());
             Intent intent = new Intent();
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setAction(Intent.ACTION_SEND);
+            intent.setAction(Intent.ACTION_SEND_MULTIPLE);
             intent.setType("*/*");
             intent.setPackage("com.whatsapp");
             intent.putExtra("jid",phone + "@s.whatsapp.net");
             intent.putExtra(Intent.EXTRA_SUBJECT, title);
             intent.putExtra(Intent.EXTRA_TEXT, text);
-            intent.putExtra(Intent.EXTRA_STREAM, fileUri);
+            intent.putExtra(Intent.EXTRA_STREAM, files);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
             //Intent chooserIntent = Intent.createChooser(intent, chooserTitle);

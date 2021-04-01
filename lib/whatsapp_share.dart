@@ -57,10 +57,10 @@ class WhatsappShare {
 
   /// Shares a local file with whatsapp.
   /// - Text: Is the [text] of the message.
-  /// - FilePath: Is the [filePath] to include with the message.
+  /// - FilePath: Is the List of paths which can be prefilled.
   /// - Phone: is the [phone] contact number to share with.
   static Future<bool> shareFile({
-    @required String filePath,
+    @required List<String> filePath,
     @required String phone,
     String text,
   }) async {
