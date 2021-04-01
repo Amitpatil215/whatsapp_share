@@ -37,12 +37,17 @@ class WhatsappShare {
     @required String phone,
     String text,
     String linkUrl,
+    Package package = Package.whatsapp,
   }) async {
     assert(phone != null && phone.isNotEmpty);
+    assert(package != null);
 
     if (phone == null && phone.isNotEmpty) {
       throw FlutterError('Phone cannot be null');
     }
+
+    String _package;
+    _package = package.index == 0 ? "com.whatsapp" : "com.whatsapp.w4b";
 
     final bool success = await _channel.invokeMethod('share', <String, dynamic>{
       'title': ' ',
@@ -50,6 +55,7 @@ class WhatsappShare {
       'linkUrl': linkUrl,
       'chooserTitle': ' ',
       'phone': phone,
+      'package': _package,
     });
 
     return success;
@@ -63,15 +69,20 @@ class WhatsappShare {
     @required List<String> filePath,
     @required String phone,
     String text,
+    Package package = Package.whatsapp,
   }) async {
     assert(filePath != null && filePath.isNotEmpty);
     assert(phone != null && phone.isNotEmpty);
+    assert(package != null);
 
     if (filePath == null || filePath.isEmpty) {
       throw FlutterError('FilePath cannot be null');
     } else if (phone == null && phone.isNotEmpty) {
       throw FlutterError('Phone cannot be null');
     }
+
+    String _package;
+    _package = package.index == 0 ? "com.whatsapp" : "com.whatsapp.w4b";
 
     final bool success =
         await _channel.invokeMethod('shareFile', <String, dynamic>{
@@ -80,6 +91,7 @@ class WhatsappShare {
       'filePath': filePath,
       'chooserTitle': ' ',
       'phone': phone,
+      'package': _package,
     });
 
     return success;
