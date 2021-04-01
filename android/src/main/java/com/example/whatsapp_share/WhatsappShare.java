@@ -22,17 +22,17 @@ import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 
-/** FlutterSharePlugin */
-public class FlutterSharePlugin implements FlutterPlugin, MethodCallHandler {
+/** WhatsappShare */
+public class WhatsappShare implements FlutterPlugin, MethodCallHandler {
     private Context context;
     private MethodChannel methodChannel;
 
-    public FlutterSharePlugin() {}
+    public WhatsappShare() {}
 
     /** Plugin registration. */
     @SuppressWarnings("deprecation")
     public static void registerWith(io.flutter.plugin.common.PluginRegistry.Registrar registrar) {
-        final FlutterSharePlugin instance = new FlutterSharePlugin();
+        final WhatsappShare instance = new WhatsappShare();
         instance.onAttachedToEngine(registrar.context(), registrar.messenger());
     }
 

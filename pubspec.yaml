@@ -14,9 +14,9 @@ flutter:
     platforms:
       android:
         package: com.example.whatsapp_share
-        pluginClass: FlutterSharePlugin
+        pluginClass: WhatsappShare
       ios:
-        pluginClass: FlutterSharePlugin
+        pluginClass: WhatsappShare
 
 dev_dependencies:
   flutter_test:

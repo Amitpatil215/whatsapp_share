@@ -1,8 +1,8 @@
-#import "FlutterSharePlugin.h"
+#import "WhatsappShare.h"
 #import <whatsapp_share/whatsapp_share-Swift.h>
 
-@implementation FlutterSharePlugin
+@implementation WhatsappShare
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-  [SwiftFlutterSharePlugin registerWithRegistrar:registrar];
+  [SwiftWhatsappShare registerWithRegistrar:registrar];
 }
 @end

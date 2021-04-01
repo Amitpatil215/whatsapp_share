@@ -1,4 +1,4 @@
 #import <Flutter/Flutter.h>
 
-@interface FlutterSharePlugin : NSObject<FlutterPlugin>
+@interface WhatsappShare : NSObject<FlutterPlugin>
 @end
