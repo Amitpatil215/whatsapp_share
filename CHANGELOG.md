@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.1
+
+* Read me examples updated
+
 ## 1.1.0
 
 * Plugin respects Business whatsapp
