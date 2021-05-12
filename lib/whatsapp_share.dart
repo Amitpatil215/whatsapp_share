@@ -34,9 +34,9 @@ class WhatsappShare {
   /// - Phone: is the [phone] contact number to share with.
 
   static Future<bool> share({
-    @required String phone,
-    String text,
-    String linkUrl,
+    required String phone,
+    String? text,
+    String? linkUrl,
     Package package = Package.whatsapp,
   }) async {
     assert(phone != null && phone.isNotEmpty);
@@ -66,9 +66,9 @@ class WhatsappShare {
   /// - FilePath: Is the List of paths which can be prefilled.
   /// - Phone: is the [phone] contact number to share with.
   static Future<bool> shareFile({
-    @required List<String> filePath,
-    @required String phone,
-    String text,
+    required List<String> filePath,
+    required String phone,
+    String? text,
     Package package = Package.whatsapp,
   }) async {
     assert(filePath != null && filePath.isNotEmpty);
