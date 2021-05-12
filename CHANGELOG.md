@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.0
+
+* Support for Null Safety
+
 ## 1.1.1
 
 * Read me examples updated
