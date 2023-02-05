@@ -1,3 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.example.whatsapp_share">
+  <queries>
+    <!-- Explicit apps you know in advance about: -->
+    <package android:name="com.whatsapp"/>
+    <package android:name="com.whatsapp.w4b"/>
+</queries>
 </manifest>

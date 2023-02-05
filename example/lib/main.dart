@@ -14,6 +14,8 @@ class MyApp extends StatelessWidget {
   final _controller = ScreenshotController();
   File? _image;
 
+  MyApp({super.key});
+
   Future<void> share() async {
     await WhatsappShare.share(
       text: 'Example share text',
@@ -116,7 +118,7 @@ class MyApp extends StatelessWidget {
         // copy the file to a new path
         // _image = await _pickedFile.copy('${directory?.path}/image1.png');
         _image = File(_pickedFile.path);
-      } else {}
+      } else {} 
     } catch (er) {
       print(er);
     }

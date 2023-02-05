@@ -69,7 +69,7 @@ class WhatsappShare {
   
     if ( filePath.isEmpty) {
       throw FlutterError('FilePath cannot be Empty');
-    } else if (phone.isNotEmpty) {
+    } else if (phone.isEmpty) {
       throw FlutterError('Phone cannot be Empty');
     }
 
