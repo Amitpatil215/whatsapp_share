@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.1
+
+* Is installed Fix for android 11 and above
+
 ## 2.0.0
 
 * Upgraded to NULL safety
