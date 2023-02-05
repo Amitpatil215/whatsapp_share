@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.0
+
+* Upgraded to NULL safety
+
 ## 1.1.1
 
 * Read me examples updated
