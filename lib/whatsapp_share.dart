@@ -16,12 +16,10 @@ class WhatsappShare {
   /// for business whatsapp set it to [Package.businessWhatsapp], it cannot be null
   ///
   /// return true if installed otherwise false.
-  static Future<bool> isInstalled({Package package = Package.whatsapp}) async {
-    assert(package != null);
-
+  static Future<bool?> isInstalled({Package package = Package.whatsapp}) async {
     String _package;
     _package = package.index == 0 ? "com.whatsapp" : "com.whatsapp.w4b";
-    final bool success =
+    final bool? success =
         await _channel.invokeMethod('isInstalled', <String, dynamic>{
       "package": _package,
     });
@@ -33,23 +31,18 @@ class WhatsappShare {
   /// - LinkUrl: Is the [linkUrl] to include with the message.
   /// - Phone: is the [phone] contact number to share with.
 
-  static Future<bool> share({
-    @required String phone,
-    String text,
-    String linkUrl,
+  static Future<bool?> share({
+    required String phone,
+    String? text,
+    String? linkUrl,
     Package package = Package.whatsapp,
   }) async {
-    assert(phone != null && phone.isNotEmpty);
-    assert(package != null);
-
-    if (phone == null && phone.isNotEmpty) {
-      throw FlutterError('Phone cannot be null');
-    }
+    assert(phone.isNotEmpty);
 
     String _package;
     _package = package.index == 0 ? "com.whatsapp" : "com.whatsapp.w4b";
 
-    final bool success = await _channel.invokeMethod('share', <String, dynamic>{
+    final bool? success = await _channel.invokeMethod('share', <String, dynamic>{
       'title': ' ',
       'text': text,
       'linkUrl': linkUrl,
@@ -65,26 +58,25 @@ class WhatsappShare {
   /// - Text: Is the [text] of the message.
   /// - FilePath: Is the List of paths which can be prefilled.
   /// - Phone: is the [phone] contact number to share with.
-  static Future<bool> shareFile({
-    @required List<String> filePath,
-    @required String phone,
-    String text,
+  static Future<bool?> shareFile({
+    required List<String> filePath,
+    required String phone,
+    String? text,
     Package package = Package.whatsapp,
   }) async {
-    assert(filePath != null && filePath.isNotEmpty);
-    assert(phone != null && phone.isNotEmpty);
-    assert(package != null);
-
-    if (filePath == null || filePath.isEmpty) {
-      throw FlutterError('FilePath cannot be null');
-    } else if (phone == null && phone.isNotEmpty) {
-      throw FlutterError('Phone cannot be null');
+    assert(filePath.isNotEmpty);
+    assert( phone.isNotEmpty);
+  
+    if ( filePath.isEmpty) {
+      throw FlutterError('FilePath cannot be Empty');
+    } else if (phone.isNotEmpty) {
+      throw FlutterError('Phone cannot be Empty');
     }
 
     String _package;
     _package = package.index == 0 ? "com.whatsapp" : "com.whatsapp.w4b";
 
-    final bool success =
+    final bool? success =
         await _channel.invokeMethod('shareFile', <String, dynamic>{
       'title': ' ',
       'text': text,

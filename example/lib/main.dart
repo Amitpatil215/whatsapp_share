@@ -12,7 +12,7 @@ void main() => runApp(MyApp());
 // ignore: must_be_immutable
 class MyApp extends StatelessWidget {
   final _controller = ScreenshotController();
-  File _image;
+  File? _image;
 
   Future<void> share() async {
     await WhatsappShare.share(
@@ -24,36 +24,36 @@ class MyApp extends StatelessWidget {
 
   Future<void> shareFile() async {
     await getImage();
-    Directory directory;
+    Directory? directory;
     if (Platform.isAndroid) {
       directory = await getExternalStorageDirectory();
     } else {
       directory = await getApplicationDocumentsDirectory();
     }
-    print('${directory.path} / ${_image.path}');
+    debugPrint('${directory?.path} / ${_image?.path}');
     await WhatsappShare.shareFile(
       text: 'Whatsapp message text',
       phone: '911234567890',
-      filePath: ["${_image.path}"],
+      filePath: ["${_image?.path}"],
     );
   }
 
   Future<void> isInstalled() async {
-    final val = await WhatsappShare.isInstalled();
-    print('Whatsapp is installed: $val');
+    final val = await WhatsappShare.isInstalled(package: Package.whatsapp);
+    debugPrint('Whatsapp is installed: $val');
   }
 
   Future<void> shareScreenShot() async {
-    Directory directory;
+    Directory? directory;
     if (Platform.isAndroid) {
       directory = await getExternalStorageDirectory();
     } else {
       directory = await getApplicationDocumentsDirectory();
     }
     final String localPath =
-        '${directory.path}/${DateTime.now().toIso8601String()}.png';
+        '${directory?.path}/${DateTime.now().toIso8601String()}.png';
 
-    await _controller.capture(path: localPath);
+    await _controller.captureAndSave(localPath);
 
     await Future.delayed(Duration(seconds: 1));
 
@@ -105,16 +105,17 @@ class MyApp extends StatelessWidget {
   ///Pick Image From gallery using image_picker plugin
   Future getImage() async {
     try {
-      File _pickedFile =
+      XFile? _pickedFile =
           // ignore: deprecated_member_use
-          await ImagePicker.pickImage(source: ImageSource.gallery);
+          await ImagePicker().pickImage(source: ImageSource.gallery);
 
       if (_pickedFile != null) {
         // getting a directory path for saving
         final directory = await getExternalStorageDirectory();
 
         // copy the file to a new path
-        _image = await _pickedFile.copy('${directory.path}/image1.png');
+        // _image = await _pickedFile.copy('${directory?.path}/image1.png');
+        _image = File(_pickedFile.path);
       } else {}
     } catch (er) {
       print(er);
