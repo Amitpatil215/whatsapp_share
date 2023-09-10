@@ -194,7 +194,7 @@ public class WhatsappShare implements FlutterPlugin, MethodCallHandler {
                 return;
             }
 
-              for(int i=0;i<filePaths.size();i++){
+            for(int i=0;i<filePaths.size();i++){
                 File file = new File(filePaths.get(i));
                 Uri fileUri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file);
                 files.add(fileUri);
@@ -207,9 +207,7 @@ public class WhatsappShare implements FlutterPlugin, MethodCallHandler {
             intent.setType("*/*");
             intent.setPackage(packageName);
             intent.putExtra("jid",phone + "@s.whatsapp.net");
-            intent.putExtra(Intent.EXTRA_SUBJECT, title);
-            intent.putExtra(Intent.EXTRA_TEXT, text);
-            intent.putExtra(Intent.EXTRA_STREAM, files);
+            intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, files);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
             //Intent chooserIntent = Intent.createChooser(intent, chooserTitle);

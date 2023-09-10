@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.2
+
+* File not sharing issue fixed addresses issues -> #17, #16
+
 ## 2.0.1
 
 * Is installed Fix for android 11 and above

@@ -3,7 +3,7 @@
 [![pub package](https://img.shields.io/pub/v/whatsapp_share.svg)](https://pub.dartlang.org/packages/flutter_share)
 
 
-A Flutter plugin for IOS and Android providing a simple way to share a message, link or local files to specific WhatsApp contact.
+A Flutter plugin for Android providing a simple way to share a message, link or local files to specific WhatsApp contact.
 
 ## Features:
 
@@ -113,7 +113,6 @@ Here is an snippets app displaying the two whatsapp share methods .
 
  Future<void> shareFile() async {
     await WhatsappShare.shareFile(
-      text: 'Whatsapp share text',
       phone: '911234567890',
       filePath: [_image1.path, _image2.path],
     );
