@@ -53,16 +53,18 @@ class MyApp extends StatelessWidget {
     } else {
       directory = await getApplicationDocumentsDirectory();
     }
-    final String localPath =
-        '${directory?.path}/${DateTime.now().millisecondsSinceEpoch}.png';
 
-    await _controller.captureAndSave(localPath);
+    final String? localPath =
+        await _controller.captureAndSave(directory!.path);
 
     await Future.delayed(const Duration(seconds: 1));
+    if (localPath == null) {
+      log("localPath is null");
+    }
 
     await WhatsappShare.shareFile(
       phone: '911234567890',
-      filePath: [localPath],
+      filePath: [localPath!],
     );
   }
 
